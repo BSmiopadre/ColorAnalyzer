@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Color Analyzer</string> x
-    <!--<string name="title_analysis">Analysis</string>
-    <string name="title_archive">Archive</string>-->
     <string name="archive_button">Archive Button</string> x
     <string name="color_hint">Average Color</string>
+    <string name="average_red">Average R: ---</string>
+    <string name="average_green">Average G: ---</string>
+    <string name="average_blue">Average B: ---</string>
 </resources>

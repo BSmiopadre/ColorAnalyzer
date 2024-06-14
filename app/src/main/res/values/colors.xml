@@ -2,8 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="red">#FFFF0000</color>
-    <color name="green">#FF00FF00</color>
-    <color name="blue">#FF0000FF</color>
-    <color name="transparent">#4DFFFFFF</color>
+    <color name="tv_red">#FFCC0000</color>
+    <color name="tv_green">#FF00CC00</color>
+    <color name="tv_blue">#FF0000CC</color>
+    <color name="transparent">#66FFFFFF</color>
+    <color name="recyclerviewItem">#6633b5e5</color>
 </resources>

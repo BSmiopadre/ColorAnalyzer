@@ -5,6 +5,7 @@
     <dimen name="horizontal_margin">55dp</dimen>
     <dimen name="vertical_margin">80dp</dimen>
     <dimen name="item_padding">16dp</dimen>
+    <dimen name="colorHint_padding">15dp</dimen>
     <dimen name="minimum">5dp</dimen>
     <dimen name="textSize">24sp</dimen>
     <dimen name="buttonSize">70dp</dimen>

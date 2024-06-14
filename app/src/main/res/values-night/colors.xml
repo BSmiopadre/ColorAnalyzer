@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red">#FF0000</color>
-    <color name="green">#00FF00</color>
-    <color name="blue">#0000FF</color>
     <color name="white">#FF000000</color>
     <color name="black">#FFFFFFFF</color>
+    <color name="tv_red">#FFFF3333</color>
+    <color name="tv_green">#FF33FF33</color>
+    <color name="tv_blue">#FF3333FF</color>
+    <color name="transparent">#66000000</color>
 </resources>
