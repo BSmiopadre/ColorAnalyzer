@@ -44,12 +44,14 @@ class MainActivity : AppCompatActivity() {
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
 
+        // flag
         var granted = true
         permissions.entries.forEach {
             if (it.key in REQUIRED_PERMISSIONS && !it.value)
                 granted = false
         }
 
+        // if all permissions in the list are granted, then start the camera
         if (granted)
             startCamera()
         else
@@ -120,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                 showArchive()
         }
 
-        if (allPermissionGranted())
+        if (allPermissionsGranted())
             startCamera()
         else
             requirePermissions()
@@ -204,7 +206,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     /** check if all required permissions are granted */
-    private fun allPermissionGranted() = REQUIRED_PERMISSIONS.all {
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 

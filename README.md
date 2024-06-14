@@ -17,7 +17,28 @@ Successivamente, compariranno sullo schermo:
 
 
 ## Requisiti
-Android 10+  
-API level 29
+-> Android 10+  
+-> API level 29
+
+### Dipendenze fondamentali
+* **CameraX**: per l'utilizzo della fotocamera
+* **Room**: per salvare i dati in un database
+
 
 ## Note
+Lo sviluppo dell'applicazione è stato guidato dalla volontà di cercare di mantenere il più possibile una fedeltà alle versioni più recenti delle librerie di sviluppo per Android.  
+
+All'interno dei file è possibile trovare commenti dettagliati sul funzionamento della maggior parte dei blocchi di codice; nonostante ciò, qui di seguito vengono riportate le funzioni principali, ritrovabili in **MainActivity.kt**:  
+    
+    startCamera()
+esegue la build degli "use case" fondamentali (Preview, ImageAnalysis) da legare alla fotocamera
+
+    showArchive()
+visualizza a schermo i dati registrati nel database negli ultimi 5 minuti;  
+per modificare tale l'intervallo di tempo, occorre cambiare il valore della variabile "TIME_LIMIT" nel _companion object_ della MainActivity
+
+    allPermissionsGranted()
+verifica che tutti i permessi necessari al funzionamento dell'applicazione sia stati concessi
+
+    requirePermissions()
+richiede i permessi necessari
