@@ -34,13 +34,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var onShowArchive = false
 
-
-    // viewModel for communication with database
+    /** viewModel for communication with database */
     private val viewModel: RGBViewModel by viewModels {
         RGBViewModelFactory((application as Application).repository)
     }
 
-    // launcher for requesting permission
+    /** launcher for requesting permission */
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -57,11 +56,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(baseContext, "Required permissions denied", Toast.LENGTH_SHORT).show()
     }
 
-    // analyzer use-case
+    /** analyzer use-case */
     private val analyzer = RGBAnalyzer { r, g, b ->
-
-        /**per modificare il tempo limite, basta cambiare il valore di questa variabile*/
-        TIME_LIMIT = System.currentTimeMillis() - 5 * 60 * 1000
 
         // format the data
         val red  = floor(r.toFloat() * 1000) / 1000
@@ -74,7 +70,8 @@ class MainActivity : AppCompatActivity() {
         viewModel.insert(rgb)
 
         // delete data inserted before the time_limit delta
-        viewModel.deleteOldData(TIME_LIMIT)
+        val timeLimit = System.currentTimeMillis() - TIME_LIMIT
+        viewModel.deleteOldData(timeLimit)
 
         // show the data on the screen
         runOnUiThread {
@@ -103,6 +100,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // set up the button to display data archive
         val button = binding.archiveButton
         button.setOnClickListener {
             showArchive()
@@ -143,16 +141,20 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
     }
 
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putBoolean("onShowArchive", onShowArchive)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
     }
 
+
+    /** bind the necessaries use cases to the Camera to start performing all main tasks */
     private fun startCamera() {
 
         val processCameraProvider = ProcessCameraProvider.getInstance(this)
@@ -189,13 +191,9 @@ class MainActivity : AppCompatActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
 
-    private fun showArchive() {
 
-        /*// set up the RecyclerView
-        val recyclerView: RecyclerView = binding.recyclerView
-        val adapter = RGBListAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)*/
+    /** display the archive containing the data stored in the database */
+    private fun showArchive() {
 
         recyclerView.visibility = View.VISIBLE
 
@@ -205,7 +203,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /** check if all permissions are granted */
+    /** check if all required permissions are granted */
     private fun allPermissionGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
@@ -218,8 +216,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val TAG = "Color Analyzer"
-        const val THREAD_EXECUTION_TIME = 1000L
-        private var TIME_LIMIT = 0L
+        private const val THREAD_EXECUTION_TIME = 1000L
+        private const val TIME_LIMIT: Long = 5 * 60 * 1000    /** per modificare il tempo limite di permanenza nel db, modificare il valore di questa variabile */
         private val REQUIRED_PERMISSIONS = mutableListOf(
             Manifest.permission.CAMERA
         ).toTypedArray()

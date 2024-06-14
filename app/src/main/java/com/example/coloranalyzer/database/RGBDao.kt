@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
-/** il DAO è un oggetto che specifica le opzioni di accesso al database */
 @Dao
 interface RGBDao {
 

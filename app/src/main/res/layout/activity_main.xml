@@ -86,6 +86,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- it has the attribute "invisible" by default because it will be showed only on "archiveButton" click -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

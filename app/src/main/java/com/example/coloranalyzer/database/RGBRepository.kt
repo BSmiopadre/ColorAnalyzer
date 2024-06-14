@@ -14,7 +14,7 @@ class RGBRepository(private val rgbDao: RGBDao) {
         rgbDao.insert(rgb)
     }
 
-    // delete from db 5 minutes old data
+    // delete from db data older than specified timeLimit
     @WorkerThread
     suspend fun deleteOldData (timeLimit: Long) {
         rgbDao.deleteOldData(timeLimit)
